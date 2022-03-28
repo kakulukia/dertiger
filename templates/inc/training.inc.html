@@ -1,0 +1,47 @@
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="media/{{ single_training.thumbnail }}" class="img-fluid rounded-start h-100" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h5 class="card-title">{{ single_training.name }}</h5>
+                    </div>
+                    <div class="col-sm-2 d-flex justify-content-end">
+                        <a href="{% url 'trainings' %}?expand={{ single_training.id }}">
+                            <i
+                                class="material-icons mk-pointer {% if training.id == single_training.id %}theme-primary-text{% else %}text-secondary{% endif %}">info</i>
+                        </a>
+                    </div>
+                </div>
+                <p class="card-text">{{ single_training.get_short_description }}</p>
+                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+
+                <div class="row">
+                    {% if single_training.id in accessed_training %}
+                    <div class="col-sm-6">
+                        <a href="{% url 'all_modules' single_training.id %}" class="btn theme-secondary-btn">Resume training</a>
+                    </div>
+                    <div class="col-sm-6 d-flex align-items-center justify-content-end">
+                        <div class="">
+                            <div class="progress mb-1" style="height: 0.35rem; width: 9rem; border-radius: 0.95rem;">
+                                <div class="progress-bar bg-success w-75" role="progressbar" aria-valuenow="75"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="py-0 my-0">75% completed</p>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="col-sm-6">
+                        <a data-bs-toggle="modal" data-bs-target="#request-access"
+                            class="btn theme-outline-secondary-btn">Request access</a>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

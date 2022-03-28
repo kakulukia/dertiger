@@ -1,0 +1,159 @@
+{% extends 'inc/dashboard_base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_messages %}
+{% bootstrap_javascript %}
+{% block title %}Dashboard{% endblock title %}
+{% block content %}
+
+
+<div class="modal" id="request-access">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Request access</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <h6 class="mb-3">Contact admin</h6>
+                
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <p class="card-text my-0">admin@training.com</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <p class="card-text my-0">+92315246256</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="px-3 my-5">
+    <h1 class="h2">All Trainings</h1>
+</div>
+{% include 'inc/msgs.inc.html' %}
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-sm-8">
+            {% if not trainings  %}
+            <div class="card">
+                <div class="card-body text-center d-flex align-items-center justify-content-center" style="height: 300px;">
+                    <div>
+                        <img src="{% static 'img/notfound.png' %}" style="width: 150px;" alt="">
+                        <h4 class="text-secondary display-3 mt-3" style="font-size: 25px;">No training exist in the record</h4>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% for single_training in trainings %}
+
+                {% include 'inc/training.inc.html' %}
+
+            {% endfor %}
+        </div>
+
+        <div class="col-sm-4">
+
+
+            {% if training %}
+            <div class="card">
+                <div class="card-header bg-white ">
+                    <h4 class="my-2 py-0">{{ training.name }}</h4>
+                </div>
+                <img src="media/{{ training.thumbnail }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <!-- <h4 class="card-title">{{ training.name }}</h4> -->
+                    <div style="max-height: 200px; overflow-y: auto; padding-right: 10px;" class="mb-3">
+                        <p class="card-text" style="">{{ training.description }}</p>
+                    </div>
+
+                    {% with all_modules=training.get_all_modules %}
+                    <h6>Modules ({{ all_modules.count }})</h6>
+
+                    <div id="all-modules">
+                        {% for module in all_modules %}
+                        <div class="card mb-2">
+                            {% with all_media=module.get_all_media %}
+                            <div class="card-header text-left">
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <a class="text-left text-decoration-none" data-bs-toggle="collapse" href="#module-{{ module.id }}">
+                                            {{ module.name }}
+                                        </a>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        {{ all_media.count }} lessons
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div id="module-{{ module.id }}" class="collapse" data-bs-parent="#all-modules">
+                                <div class="card-body">
+                                    {% for media in all_media %}
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="material-icons theme-secondary-text" style="font-size: 18px;">play_arrow</i>
+                                        <p class="my-0 py-0 mx-2">{{ media }}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endwith %}
+                        </div>
+                        {% endfor %}
+
+                    
+                    </div>
+
+                    {% endwith %}
+
+                    {% if allowed %}
+                        <a href="{% url 'all_modules' training.id %}" class="btn w-100  theme-primary-btn">Open training</a>
+                    {% else %}
+                        <a data-bs-toggle="modal" data-bs-target="#request-access" class="btn w-100  theme-outline-primary-btn">Request access</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+
+            <div class="card">
+                <div class="card-body text-center d-flex align-items-center justify-content-center" style="height: 300px;">
+                    <div>
+                        <img src="{% static 'img/notfound.png' %}" style="width: 150px;" alt="">
+                        <h4 class="text-secondary display-3 mt-3" style="font-size: 25px;">No training selected</h4>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            {% endif %}
+        </div>
+    </div>
+   
+
+
+</div>
+{% endblock content %}

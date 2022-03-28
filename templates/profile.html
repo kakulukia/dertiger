@@ -1,0 +1,155 @@
+{% extends 'inc/dashboard_base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_messages %}
+{% bootstrap_javascript %}
+
+{% block title %}Dashboard{% endblock title %}
+
+
+
+{% block content %}
+
+<div class="px-3 my-5">
+    <h1 class="h2">My profile</h1>
+</div>
+<!-- 
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Update your profile</h1> -->
+    <!-- <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+        </button>
+    </div> -->
+
+
+<!-- </div> -->
+    {% include 'inc/msgs.inc.html' %}
+
+<div>
+
+    <div class="row px-3 mb-4">
+        <div class="col-sm-8">
+            <div class="card google-shadow" style="border-radius: 5px;">
+                <div class="card-header bg-white card-separator d-flex align-items-center" style="background-color: #cccccc;">
+                    <h5 class="my-2">Enrolled trainings</h5>
+                   
+                </div>
+                <div class="card-body p-0 px-3 pt-3" style="max-height: 75vh; overflow-y: auto;">
+                    {% for access in all_trainings %}
+                        {% with single_training=access.training %}
+                            {% include 'inc/training.inc.html' %}
+                        {% endwith %}
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+            <div class="card mt-4 google-shadow" style="border-radius: 5px;">
+                <div class="card-header bg-white card-separator d-flex align-items-center" style="background-color: #cccccc;">
+                    <h5 class="my-2">Logged in sessions</h5>
+                  
+                </div>
+                <div class="card-body p-0 px-3 pt-3" style="max-height: 75vh; overflow-y: auto;">
+                
+            
+                    <div>
+                        <div class="">
+                            <table class="table p-3 border table-striped">
+                                <thead style="border-bottom: solid 2px #de7b5f;">
+                                    <tr>
+                                        <th style="font-weight: normal;">Browser</th>
+                                        <th style="font-weight: normal;">Operating System</th>
+                                        <th style="font-weight: normal;">Device</th>
+                                        <th style="font-weight: normal;">IP address</th>
+                                        <th style="font-weight: normal;">Last login</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Run a loop  -->
+                                    {% for device in device_sessions %}
+                                    <tr>
+                                        <td>{{ device.browser }}</td>
+                                        <td>{{ device.os }}</td>
+                                        <td>{{ device.device_type }}</td>
+                                        <td>{{ device.ip }}</td>
+                                        <td>{{ device.last_login.date }} <br> {{ device.last_login.time }}</td>
+                                        <td>
+                                            <a href="{% url 'delete_device' device.id %}"
+                                                onclick="return confirm('Are you sure you want to remove this session?')">
+                                                <svg class="text-danger" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-4">
+            <div>
+                <div class="card google-shadow" style="border-radius: 5px;">
+                    <div class="card-header bg-white card-separator">
+                        <h5 class="my-2">Edit personal details</h5>
+                    </div>
+                    <div class="card-body p-3">
+                        <form action="{% url 'profile' %}" method="post" class="mb-0">
+                            {% csrf_token %}
+                            {% bootstrap_form user_form layout="floating" %}
+                            <button type="submit" name="" id="" class="btn theme-primary-btn mb-0 btn-lg w-100">Save personal
+                                details</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            
+        
+            
+            
+            <div class="mt-4">
+                <div class="card google-shadow" style="border-radius: 5px;">
+                    <div class="card-header bg-white card-separator">
+                        <h5 class="my-2">Reset password</h5>
+                    </div>
+                    <div class="card-body p-3">
+                        <form action="{% url 'reset-password' %}" method="post" class="mb-0">
+                            {% csrf_token %}
+                            {% bootstrap_form password_form layout="floating" %}
+                            <button type="submit" name="" id="" class="btn theme-primary-btn mb-0 btn-lg w-100">Save new password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!-- <canvas class="my-4 w-100 text-success" id="myChart" width="900" height="380"></canvas> -->
+
+<script src="{% static 'assets/js/folders.js' %}"></script>
+<script>
+    $("#id_password2, #id_password1").parent().remove();
+</script>
+
+{% endblock content %}
