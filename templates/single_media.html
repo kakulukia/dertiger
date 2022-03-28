@@ -36,6 +36,9 @@
     <div class="row mb-4">
         <div class="col-sm-8">
             {% if not media  %}
+            <script>
+                var to_enter_password = false;
+            </script>
             <div class="card">
                 <div class="card-body text-center d-flex align-items-center justify-content-center"
                     style="height: 300px;">
@@ -46,8 +49,11 @@
                 </div>
             </div>
             {% else %}
-
+            <script>
+                var to_enter_password = true;
+            </script>
             <div class="card">
+               
                 <iframe style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;" src="{{ media.file }}"></iframe>
                 <div class="card-body">
                     <div class="row my-3">
@@ -156,5 +162,16 @@
 
 
 </div>
+
+
+<script>
+    if (to_enter_password) {
+        console.log("yes"); 
+        setTimeout(() => {
+            console.log($("input.js-password"));
+            $("input.js-password").value = "asdasd";            
+        }, 500);
+    }
+</script>
 
 {% endblock content %}
