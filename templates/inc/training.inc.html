@@ -27,10 +27,10 @@
                     <div class="col-sm-6 d-flex align-items-center justify-content-end">
                         <div class="">
                             <div class="progress mb-1" style="height: 0.35rem; width: 9rem; border-radius: 0.95rem;">
-                                <div class="progress-bar bg-success w-75" role="progressbar" aria-valuenow="75"
+                                <div class="progress-bar bg-success" style="width: {{single_training.progress}}%;" role="progressbar" aria-valuenow="{{ single_training.progress }}"
                                     aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <p class="py-0 my-0">75% completed</p>
+                            <p class="py-0 my-0">{{ single_training.progress }}% completed</p>
                         </div>
                     </div>
                     {% else %}

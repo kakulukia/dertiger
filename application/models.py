@@ -119,6 +119,17 @@ class Training(models.Model):
         all_modules = Module.objects.filter(training=self)
         return all_modules
 
+    def get_progress(self, completed_ids):
+        completed = 0
+        module_ids = Module.objects.filter(
+            training=self).values_list('id', flat=True)
+        all_medias = Media.objects.filter(
+            module_id__in=module_ids).values_list('id', flat=True)
+        for i in completed_ids:
+            if i in all_medias:
+                completed += 1
+        return int((completed / all_medias.count()) * 100)
+
     def get_short_description(self):
         limit = 150
         description = self.description
@@ -154,6 +165,15 @@ class Module(models.Model):
             module=self).values_list("name", flat=True)
         return all_media
 
+    def get_progress(self, completed_ids):
+        completed = 0
+        all_medias = Media.objects.filter(
+            module=self).values_list('id', flat=True)
+        for i in completed_ids:
+            if i in all_medias:
+                completed += 1
+        return int((completed / all_medias.count()) * 100)
+
     def __str__(self):
         return self.name
 
@@ -174,9 +194,19 @@ class Media(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ('id',)
 
 # Model for giving the access to the user
+
+
 class Access(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     training = models.ForeignKey(Training, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now, editable=False)
+
+
+class Completed(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    media = models.ForeignKey(Media, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)

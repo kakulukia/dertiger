@@ -50,6 +50,8 @@ urlpatterns = [
     # Test path for checking the browser, IP-address, and device info of the user
     path('browser/', views.get_browser_info, name='browser'),
 
+    path('media/<media_id>/done', views.mark_as_done, name='mark-as-done'),
+
     path('device/<int:device_id>/delete',
          views.delete_user_device, name='delete_device'),
 

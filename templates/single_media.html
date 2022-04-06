@@ -7,6 +7,9 @@
 {% block title %}Dashboard{% endblock title %}
 {% block content %}
 
+<div id="my-content">
+    
+
 {% include 'inc/msgs.inc.html' %}
 
 <div class="px-3 my-5">
@@ -25,7 +28,7 @@
             <i class="material-icons mx-2 link-arrow">keyboard_arrow_right</i>
 
             <a href="{% url 'single_media' training.id module.id module.id %}">
-                {{ module }}
+                {{ media }}
             </a>
 
         {% endif %}
@@ -54,17 +57,31 @@
             </script>
             <div class="card">
                
-                <iframe style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;" src="{{ media.file }}"></iframe>
+            <div style="padding:56.25% 0 0 0;position:relative;"><iframe referrerpolicy="strict-origin"
+                    src="https://player.vimeo.com/video/692533293?h=99c53c932a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+                    frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+                    style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                    title="Yvonne und Matthias - Erfolgsinterview"></iframe></div>
+            <script src="https://player.vimeo.com/api/player.js"></script>
+            
+                <!-- <iframe style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;" src="{{ media.file }}"></iframe> -->
                 <div class="card-body">
                     <div class="row my-3">
                         <div class="col-sm-9">
                             <div>
-                                <h4 class="card-title py-0">{{ media.name }}</h4>
+                                <div class="d-flex align-items-center">
+                                    {% if media.id in completed_media %}
+                                        <i class="material-icons text-success" style="margin-right: 8px;" title="You have already completed it">check_circle</i>
+                                    {% endif %}
+                                    <h4 class="card-title py-0 my-0">{{ media.name }}</h4>
+                                </div>
                                 <p class="mt-2 theme-secondary-text mb-0">{{ media.created_at }}</p>
                             </div>
                         </div>
                         <div class="col-sm-3 d-flex align-items-center justify-content-end">
-                            <button type="button" class="btn theme-primary-btn">Mark as done</button>
+                            {% if media.id not in completed_media %}
+                                <a type="button" onclick="return confirm('Are you sure you want to mark it done?')" class="btn theme-primary-btn" href="{% url 'mark-as-done' media.id %}">Mark as done</a>
+                            {% endif %}
                         </div>
                     </div>
                     <div>
@@ -92,7 +109,7 @@
                             
                         </div>
                         <div>
-                            <a href="" onclick="return false;">
+                            <a onclick="openFullscreen();">
                                 <img src="{% static 'img/full-screen-icon.png' %}" alt="full-screen-icon" class="img-fluid"
                                     style="width: 20px;">
                             </a>
@@ -116,7 +133,10 @@
                             </div>
                             <div style="width: 62%;" class="px-2">
                                 <p class="m-0 p-0 text-dark d-flex align-items-center">
-                                    {{ current_media.name }} <i class="material-icons text-success mx-2">check_circle</i>
+                                    {{ current_media.name }} 
+                                    {% if current_media.id in completed_media %}
+                                        <i class="material-icons text-success mx-2">check_circle</i>
+                                    {% endif %}
                                 </p>
                             </div>
                         </div>
@@ -172,6 +192,21 @@
             $("input.js-password").value = "asdasd";            
         }, 500);
     }
+
+
+    var elem = document.getElementById("my-content");
+    function openFullscreen() {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+        }
+    }
 </script>
+
+</div>
+
 
 {% endblock content %}

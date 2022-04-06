@@ -107,6 +107,14 @@ def profile(request):
 
     device_sessions = Device.objects.filter(user=request.user)
     all_trainings = Access.objects.filter(user=request.user)
+
+    completed_media_ids = Completed.objects.filter(
+        user=request.user).values_list('media_id', flat=True)
+
+    for access in all_trainings:
+        training = access.training
+        training.progress = training.get_progress(completed_media_ids)
+
     context = {
         "all_trainings": all_trainings,
         "user_form": user_form,
@@ -258,6 +266,14 @@ def all_trainings(request):
         training = Training.objects.filter(id=expand_id).first()
         allowed = True if training and training.id in accessed_training else False
 
+    completed_media_ids = Completed.objects.filter(
+        user=request.user).values_list('media_id', flat=True)
+
+    for training in trainings:
+        if training.id in accessed_training:
+            training.progress = training.get_progress(completed_media_ids)
+            print(training.progress)
+
     context = {
         'allowed': allowed,
         'training': training,
@@ -272,6 +288,10 @@ def all_trainings(request):
 def all_modules(request, training_id):
     training = Training.objects.get(id=training_id)
     modules = Module.objects.filter(training=training)
+    completed_media_ids = Completed.objects.filter(
+        user=request.user).values_list('media_id', flat=True)
+    for module in modules:
+        module.progress = module.get_progress(completed_media_ids)
     context = {
         'training': training,
         'modules': modules
@@ -281,14 +301,34 @@ def all_modules(request, training_id):
 # Function to render a single video page
 
 
+def main_media(request, media_id):
+    media = Media.objects.filter(id=media_id).first()
+    if not media:
+        return redirect('trainings')
+
+    module_id = media.module.id
+    training_id = media.module.training.id
+    return redirect(
+        'single_media',
+        training_id=training_id,
+        module_id=module_id,
+        media_id=media_id
+    )
+
+
 @login_required
 def media(request, training_id, module_id, media_id=None):
     module = Module.objects.get(id=module_id)
     medias = Media.objects.filter(module=module)
     training = Training.objects.get(id=training_id)
+    completed_media_ids = Completed.objects.filter(
+        user=request.user).values_list('media_id', flat=True)
     media = None
     if media_id:
         media = Media.objects.get(id=media_id)
+    else:
+        media = Media.objects.filter(module=module).first()
+        return main_media(request, media.id)
 
     # print(medias[0])
     # if len(media) > 1:
@@ -301,11 +341,62 @@ def media(request, training_id, module_id, media_id=None):
         'media': media,
         'first_media': medias.first(),
         'training': training,
+        'completed_media': completed_media_ids
     }
     return render(request, 'single_media.html', context)
 
 
+@login_required
+def mark_as_done(request, media_id):
+    media = Media.objects.filter(id=media_id).first()
+    if not media:
+        messages.error(request, "Invalid action")
+        return redirect("trainings")
+
+    training = media.module.training
+    access = Access.objects.filter(
+        user=request.user, training=training).first()
+
+    if not access:
+        messages.error(request, "You don't have access to this training")
+        return redirect("trainings")
+
+    Completed.objects.create(
+        user=request.user,
+        media=media
+    )
+
+    if media.next:
+        media = media.next
+        messages.success(request, 'Media has been marked as completed')
+        training_id = media.module.training.id
+        module_id = media.module.id
+        media_id = media.id
+        return redirect(
+            'single_media',
+            training_id=training_id,
+            module_id=module_id,
+            media_id=media_id
+        )
+
+    print(media.module.next)
+    if media.module.next:
+        messages.success(request, 'Module has been marked as completed')
+        next_module = media.module.next
+        training_id = next_module.training.id
+        module_id = next_module.id
+        return redirect(
+            'media',
+            training_id=training_id,
+            module_id=module_id
+        )
+
+    messages.success(request, 'Training has been completed')
+    return redirect('trainings')
+
 # Function to render the single_media page
+
+
 @login_required
 def single_media(request, training_id, module_id, media_id):
     training = Training.objects.get(id=training_id)

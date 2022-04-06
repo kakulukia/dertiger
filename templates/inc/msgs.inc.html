@@ -1,5 +1,5 @@
 {% for message in messages %}
-    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags}}{% endif %} d-flex align-items-center radius-10 alert-dismissible"
+    <div class="mt-4 alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags}}{% endif %} d-flex align-items-center radius-10 alert-dismissible"
         role="alert">
         {% if message.tags == 'error' %}
         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
