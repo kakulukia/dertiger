@@ -254,8 +254,6 @@ def get_accessed_training(user):
     return access
 
 # Function to Render the All Trainings Page
-
-
 @login_required
 def all_trainings(request):
     trainings = Training.objects.all()
@@ -269,10 +267,10 @@ def all_trainings(request):
     completed_media_ids = Completed.objects.filter(
         user=request.user).values_list('media_id', flat=True)
 
-    for training in trainings:
-        if training.id in accessed_training:
-            training.progress = training.get_progress(completed_media_ids)
-            print(training.progress)
+    for single_training in trainings:
+        if single_training.id in accessed_training:
+            single_training.progress = single_training.get_progress(completed_media_ids)
+            print(single_training.progress)
 
     context = {
         'allowed': allowed,
@@ -280,10 +278,12 @@ def all_trainings(request):
         'trainings': trainings,
         'accessed_training': accessed_training,
     }
+    print(training)
     return render(request, 'all_trainings.html', context)
 
 
-# Function to Render the All Modules Page
+
+# Function to render the all modules page 
 @login_required
 def all_modules(request, training_id):
     training = Training.objects.get(id=training_id)
@@ -298,9 +298,31 @@ def all_modules(request, training_id):
     }
     return render(request, 'all_modules.html', context)
 
+# Function to Render the All Modules Page
+@login_required
+def resume_all_modules(request, training_id):
+    training = Training.objects.get(id=training_id)
+    modules = Module.objects.filter(training=training)
+    modules_ids = modules.values_list('id', flat=True)
+    all_media_ids = Media.objects.filter(module_id__in=modules_ids).values_list('id', flat=True)
+    completed_media_ids = Completed.objects.filter(media_id__in=all_media_ids, user=request.user).values_list('media_id', flat=True)
+    # all media objects ids list
+    all_media_ids_list = list(all_media_ids)
+    # all compeleted objects ids list
+    completed_media_ids_list = list(completed_media_ids)
+    # if not 
+    if all_media_ids_list != completed_media_ids_list and len(completed_media_ids_list) != 0:
+        redirected_media_id = get_remaining_media_id(all_media_ids_list,completed_media_ids_list)
+        return main_media(request, redirected_media_id)    
+    for module in modules:
+        module.progress = module.get_progress(completed_media_ids)
+    context = {
+        'training': training,
+        'modules': modules
+    }
+    return render(request, 'all_modules.html', context)
+
 # Function to render a single video page
-
-
 def main_media(request, media_id):
     media = Media.objects.filter(id=media_id).first()
     if not media:
@@ -314,6 +336,18 @@ def main_media(request, media_id):
         module_id=module_id,
         media_id=media_id
     )
+
+# function for getting the media which is not in the completed model
+
+
+def get_remaining_media_id(all_media_ids_list, completed_media_ids_list):
+    for all_media_id in all_media_ids_list:
+        if all_media_id in completed_media_ids_list:
+            continue
+        else:
+            return all_media_id
+
+
 
 
 @login_required
@@ -330,11 +364,6 @@ def media(request, training_id, module_id, media_id=None):
         media = Media.objects.filter(module=module).first()
         return main_media(request, media.id)
 
-    # print(medias[0])
-    # if len(media) > 1:
-    #     first_media = media[0]
-    # else:
-    #     first_media = media
     context = {
         'module': module,
         'medias': medias,
@@ -343,7 +372,7 @@ def media(request, training_id, module_id, media_id=None):
         'training': training,
         'completed_media': completed_media_ids
     }
-    return render(request, 'single_media.html', context)
+    return render(request, 'single_media.html', context)  
 
 
 @login_required
@@ -410,3 +439,5 @@ def single_media(request, training_id, module_id, media_id):
         'medias': medias,
     }
     return render(request, 'single_media.html', context)
+
+

@@ -7,7 +7,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-10">
-                        <h5 class="card-title">{{ single_training.name }}</h5>
+                        <a href="{% url 'all_modules' single_training.id %}" class="text-dark">
+                            <h5 class="card-title">{{ single_training.name }}</h5>
+                        </a>
                     </div>
                     <div class="col-sm-2 d-flex justify-content-end">
                         <a href="{% url 'trainings' %}?expand={{ single_training.id }}">
@@ -22,7 +24,7 @@
                 <div class="row">
                     {% if single_training.id in accessed_training %}
                     <div class="col-sm-6">
-                        <a href="{% url 'all_modules' single_training.id %}" class="btn theme-secondary-btn">Resume training</a>
+                        <a href="{% url 'resume_all_modules' single_training.id %}" class="btn theme-secondary-btn">Resume training</a>
                     </div>
                     <div class="col-sm-6 d-flex align-items-center justify-content-end">
                         <div class="">
