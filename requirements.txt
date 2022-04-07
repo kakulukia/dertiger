@@ -1,3 +1,12 @@
-Django==3.2.8
+asgiref==3.5.0
+beautifulsoup4==4.10.0
+Django==4.0.3
 django-bootstrap5==21.3
-django-crispy-forms==1.13.0
+django-jazzmin==2.5.0
+django-user-agents==0.4.0
+Pillow==9.1.0
+soupsieve==2.3.2
+sqlparse==0.4.2
+tzdata==2022.1
+ua-parser==0.10.0
+user-agents==2.2.0

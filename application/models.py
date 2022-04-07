@@ -4,7 +4,6 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User, auth
 from django.utils import timezone
-import html2text
 from django.contrib.sessions.models import Session
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
