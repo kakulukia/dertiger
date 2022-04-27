@@ -8,8 +8,8 @@
 
 <head>
     <!-- <base href="http://istudy.pythonanywhere.com/"> -->
-    <!-- <base href="http://127.0.0.1:8000/"> -->
-    <base href="http://mamaanywhere.pythonanywhere.com/">
+    <base href="http://127.0.0.1:8000/">
+    <!-- <base href="http://mamaanywhere.pythonanywhere.com/"> -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,7 +69,8 @@
 
     
     <div class="text-center py-4 mt-4">
-        <i class="material-icons theme-primary-text" style="font-size: 80px; user-select: auto;">local_library</i>
+        <img src="{% static 'img/mylogo.png' %}" style="width:250px" alt="Logo">
+        <!-- <i class="material-icons theme-primary-text" style="font-size: 80px; user-select: auto;">local_library</i> -->
         <h1 class="display-6 mb-0 mt-4 text-main-head">
             {% block form_title %}{% endblock form_title %}
         </h1>

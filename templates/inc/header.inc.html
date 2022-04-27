@@ -1,21 +1,21 @@
 {% load static %}
 
 
-<header class="navbar theme-primary-bg navbar-expand-md  bd-navbar" style="user-select: auto;">
+<header class="navbar navbar-expand-md google-shadow bd-navbar" style="user-select: auto; border-radius: 0px 0px 20px 20px;">
   <nav class="my-2 container-xxl flex-wrap flex-md-nowrap" aria-label="Main navigation" style="user-select: auto;">
     <div class="radius-100" style="border-radius:100%">
       <a href="{% url 'trainings' %}">
-        <i class="material-icons text-white" style="font-size: 50px;">local_library</i>
-        <!-- <img src="{% static 'img/logo3.png' %}" style="width:50px" alt="Logo"> -->
+        <!-- <i class="material-icons text-white" style="font-size: 50px;">local_library</i> -->
+        <img src="{% static 'img/mylogo.png' %}" style="width:250px" alt="Logo">
       </a>
     </div>
-    <div>
+    <!-- <div>
       {% if user.is_authenticated %}
       <h5 class="mx-3 text-white my-0">Hi {% if user.is_superuser %}Admin{% else %}{{ user.first_name }}{% endif %}</h5>
       {% else %}
       <h5 class="mx-3 text-white my-0">HowToTutorial</h5>
       {% endif %}
-    </div>
+    </div> -->
 
 
     <!-- <div class="navbar-collapse collapse" id="bdNavbar" style="user-select: auto;">
@@ -72,14 +72,14 @@
 
 
       <li class="nav-item col-6 col-md-auto d-flex align-items-center" style="user-select: auto;">
-        <a class="nav-link p-2 bg-white  theme-secondary-text" href="{% url 'profile' %}" rel="noopener" style="user-select: auto;">
+        <a class="nav-link p-2 bg-white border theme-secondary-text" href="{% url 'profile' %}" rel="noopener" style="user-select: auto;">
           <i class="material-icons" style="font-size: 30px;">account_circle</i>
         </a>
       </li>
 
 
       <li class="nav-item col-6 col-md-auto d-flex align-items-center" style="user-select: auto;">
-        <a class="nav-link p-2 bg-white theme-secondary-text" href="{% url 'logout' %}" rel="noopener" style="user-select: auto;">
+        <a class="nav-link p-2 bg-white border theme-secondary-text" href="{% url 'logout' %}" rel="noopener" style="user-select: auto;">
           <i class="material-icons" style="font-size: 30px;">logout</i>
         </a>
       </li>
