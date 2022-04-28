@@ -22,12 +22,15 @@
 
 <div class="row">
 
-    
+
     <div class="col-lg-8 border rounded mb-3 p-0">
 
         <div class="iframe-container">
-            <iframe style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;"
-                src="{{ first_media.file }}"></iframe>
+            <!-- <iframe style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;"
+                src="{{ first_media.file }}"></iframe> -->
+            <video style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;" controls id="video">
+                <source src="{% static 'vid/sample.mp4' %}">
+            </video>
         </div>
 
         <div class="px-3 mt-3">
@@ -53,7 +56,7 @@
 
     </div>
 
-    
+
     <div class="col-lg-4">
         <div class="border rounded p-3 mb-4 mt-0">
 
@@ -83,28 +86,29 @@
             </div>
 
             {% for media in medias %}
-                <div class="videos-parent mt-2" style="overflow-y: scroll; overflow-x: hidden; height: auto;">
+            <div class="videos-parent mt-2" style="overflow-y: scroll; overflow-x: hidden; height: auto;">
 
-                    <a href="{% url 'single_media' training.id module.id media.id %}" class="text-decoration-none">
-                        <div class="d-flex mb-2 p-2 rounded-3" {% if forloop.counter == 1 %} id="single-video-container" {% endif %} >
-                            <div>
-                                <p style="margin-right: 10px; margin-top: 35px;">
-                                    {{ forloop.counter }}
-                                </p>
-                            </div>
-                            <div>
-                                <img src="media/{{ media.thumbnail }}"
-                                    class="img-fluid" alt="video-thumbnail" style="width: 10rem; border-radius: 10px;">
-                            </div>
-                            <div>
-                                <p class="m-0 p-0 text-dark fw-bold mx-3">
-                                    {{ media.name }}
-                                </p>
-                            </div>
+                <a href="{% url 'single_media' training.id module.id media.id %}" class="text-decoration-none">
+                    <div class="d-flex mb-2 p-2 rounded-3" {% if forloop.counter==1 %} id="single-video-container" {%
+                        endif %}>
+                        <div>
+                            <p style="margin-right: 10px; margin-top: 35px;">
+                                {{ forloop.counter }}
+                            </p>
                         </div>
-                    </a>
+                        <div>
+                            <img src="media/{{ media.thumbnail }}" class="img-fluid" alt="video-thumbnail"
+                                style="width: 10rem; border-radius: 10px;">
+                        </div>
+                        <div>
+                            <p class="m-0 p-0 text-dark fw-bold mx-3">
+                                {{ media.name }}
+                            </p>
+                        </div>
+                    </div>
+                </a>
 
-                </div>
+            </div>
             {% endfor %}
 
         </div>
@@ -127,7 +131,7 @@
             </p>
         </div>
     </div>
-    
+
 
 </div>
 

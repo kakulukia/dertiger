@@ -64,8 +64,15 @@
                             style="position:absolute;top:0;left:0;width:100%;height:100%;"
                             title="Yvonne und Matthias - Erfolgsinterview"></iframe></div>
                     <script src="https://player.vimeo.com/api/player.js"></script> -->
+                    
+                    <!-- IFRAME  -->
+                    <!-- <iframe style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;" src="{{ media.file }}"></iframe> -->
 
-                    <iframe style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;" src="{{ media.file }}"></iframe>
+                    <!-- SINGLE STATIC VIDEO  -->
+                    <video style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;" controls id="video">
+                        <source src="{% static 'vid/sample.mp4' %}">
+                    </video>
+                    
                     <div class="card-body">
                         <div class="row my-3">
                             <div class="col-sm-9">
