@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap5',
+
+    'storages',
+
     # adding django-agents to the installed apps
     'django_user_agents',
     'adminpanel.apps.AdminpanelConfig',
@@ -168,3 +171,13 @@ BOOTSTRAP5 = {
     "javascript_in_head": True,
     "layout": "floating"
 }
+
+
+
+AWS_ACCESS_KEY_ID = 'AKIAW5LHX23PGWXA2JIT'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'andy-media-bucket'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
