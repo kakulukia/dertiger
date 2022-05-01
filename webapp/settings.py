@@ -40,9 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap5',
-
     'storages',
-
     # adding django-agents to the installed apps
     'django_user_agents',
     'adminpanel.apps.AdminpanelConfig',
@@ -86,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'application.context_processors.aws_media'
             ],
         },
     },
@@ -145,19 +144,9 @@ USE_L10N = True
 
 USE_TZ = False
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -172,12 +161,35 @@ BOOTSTRAP5 = {
     "layout": "floating"
 }
 
+#--------------- static files configuration for development ------------------#
+# static files configuration for development
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static') ]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 
+#--------------------- media files configuration for development-----------------#
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-AWS_ACCESS_KEY_ID = '******************'
-AWS_SECRET_ACCESS_KEY = '******************'
-AWS_STORAGE_BUCKET_NAME = 'andy-media-bucket'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# -------------------------AWS S3 CONFIGURATION---------------------------#
+AWS_ACCESS_KEY_ID = '********************'
+AWS_SECRET_ACCESS_KEY = '********************'
+AWS_STORAGE_BUCKET_NAME = 'andy-media-bucket-1'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+AWS_DEFAULT_ACL = 'public-read'
+
+#--------------- static files configuration for production ------------------#
+AWS_LOCATION = 'static'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+#--------------------- media files configuration for production-----------------#
+MEDIA_LOCATION = 'media'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+DEFAULT_FILE_STORAGE = 'webapp.storages.MediaStore'
+
+

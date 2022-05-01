@@ -29,7 +29,7 @@
             <!-- <iframe style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;"
                 src="{{ first_media.file }}"></iframe> -->
             <video style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;" controls id="video">
-                <source src="{% static 'vid/sample.mp4' %}">
+                <source src="{{ MEDIA_URL }}{{ first_media.file }}">
             </video>
         </div>
 
@@ -97,7 +97,7 @@
                             </p>
                         </div>
                         <div>
-                            <img src="media/{{ media.thumbnail }}" class="img-fluid" alt="video-thumbnail"
+                            <img src="{{ MEDIA_URL }}{{ media.thumbnail }}" class="img-fluid" alt="video-thumbnail"
                                 style="width: 10rem; border-radius: 10px;">
                         </div>
                         <div>

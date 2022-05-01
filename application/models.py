@@ -182,7 +182,7 @@ class Media(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     thumbnail = models.ImageField(upload_to='thumbnails/')
-    file = models.URLField()
+    file = models.FileField(upload_to='videos/')
     module = models.ForeignKey(Module, on_delete=models.CASCADE)
     prev = models.ForeignKey('self', on_delete=models.CASCADE,
                              related_name='file_prev', null=True, blank=True)

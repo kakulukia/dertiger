@@ -68,9 +68,9 @@
                     <!-- IFRAME  -->
                     <!-- <iframe style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;" src="{{ media.file }}"></iframe> -->
 
-                    <!-- SINGLE STATIC VIDEO  -->
+                    <!-- DYNAMIC VIDEO FROM AWS S3 -->
                     <video style="width: 100%; height: 25rem; border-radius: 4px 4px 0px 0px;" controls id="video">
-                        <source src="{% static 'vid/sample.mp4' %}">
+                        <source src="{{ MEDIA_URL }}{{ media.file }}">
                     </video>
                     
                     <div class="card-body">
@@ -137,7 +137,7 @@
                                         style="font-size: 30px;">arrow_right</i>
                                 </div>
                                 <div style="width: 31%;">
-                                    <img src="media/{{ current_media.thumbnail }}" class="img-fluid"
+                                    <img src="{{ MEDIA_URL }}{{ current_media.thumbnail }}"  class="img-fluid"
                                         alt="video-thumbnail" style="width: 8rem;">
                                 </div>
                                 <div style="width: 62%;" class="px-2">
@@ -160,7 +160,7 @@
                     <div class="card-header bg-white ">
                         <h4 class="my-2 py-0">{{ training.name }}</h4>
                     </div>
-                    <img src="media/{{ training.thumbnail }}" class="card-img-top" alt="...">
+                    <img src="{{ MEDIA_URL }}{{ training.thumbnail }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <!-- <h4 class="card-title">{{ training.name }}</h4> -->
                         <div>

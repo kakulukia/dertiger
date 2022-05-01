@@ -1,0 +1,369 @@
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.nav-link {
+  border-radius: 10px !important;
+  margin: 0px 10px;
+  padding: 9px 9px;
+  transition-duration: 0.25s;
+}
+
+.nav-link:hover {
+  transition-duration: 0.25s;
+  background-color: #e9e9e9;
+}
+
+.mk-pointer {
+  cursor: pointer;
+}
+
+.text-light-danger {
+  color: #ff7a7a;
+}
+
+.hover-light {
+  transition-duration: 0.25s;
+}
+
+.hover-light:hover {
+  background-color: rgb(248, 249, 250);
+  transition-duration: 0.25s;
+}
+
+.radius-100 {
+  border-radius: 100px;
+}
+
+.radius-10 {
+  border-radius: 10px;
+}
+
+.form-select,
+input,
+textarea {
+  /* border-radius: 10px !important; */
+}
+
+/* button.btn {
+            padding: 12px 15px !important;
+        } */
+
+.text-main-head {
+  font-size: 33px;
+}
+
+.text-output img {
+  width: 100% !important;
+}
+
+.radius-10 {
+  border-radius: 10px !important;
+}
+
+.google-shadow {
+  box-shadow: 2px 2px 2px #cccccc;
+}
+
+.bg-light-success {
+  /* background-color: #f2fff5; */
+  border: solid 1px #198754;
+  border-left: solid 4px #198754;
+}
+
+.richText-toolbar ul li a {
+  color: grey;
+}
+
+.message {
+  width: fit-content;
+  max-width: 450px;
+}
+
+.first-person {
+  margin-left: auto;
+  margin-right: 0;
+  background-color: #198754;
+  color: white;
+}
+
+.second-person {
+  background-color: #fcfcfc;
+  border: solid 1px #e9e9e9;
+}
+
+.message-first-time {
+  color: white;
+  font-size: 10px;
+}
+
+.message-second-time {
+  color: grey;
+  font-size: 10px;
+}
+
+/* STYLING THE ALL TRAININGS PAGE  */
+#training-thumbnail {
+  width: 25px !important;
+}
+
+#single-video-container {
+  background-color: rgb(230, 230, 230) !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar-nav {
+    display: none;
+  }
+}
+
+.cricle {
+  border: solid 1px #f9f9f9;
+  border-radius: 100%;
+}
+
+div.my-video {
+  border-right: solid 5px #ffffff;
+}
+
+.selected-video {
+  border-right: solid 5px #de7b5f;
+  background-color: #f7f7f7;
+  font-weight: bold;
+}
+
+.my-video:hover {
+  border-right: solid 5px #de7b5f;
+}
+
+.circle-yellow {
+  color: #fffea6;
+}
+
+.circle-green {
+  color: #a6ffaa;
+}
+
+.circle-purple {
+  color: #c3b1ca;
+}
+
+.circle-blue {
+  color: #a6c8ff;
+}
+
+.circle-red {
+  color: #ffa6aa;
+}
+
+.popborder {
+  box-shadow: 5px 5px 5px grey;
+  border: solid 3px;
+}
+
+.border-yellow {
+  border-color: #fffea6;
+}
+
+.border-purple {
+  border-color: #e6a6ff;
+}
+
+.border-blue {
+  border-color: #a6c8ff;
+}
+
+.border-green {
+  border-color: #a6ffaa;
+}
+
+.border-red {
+  border-color: #ffa6aa;
+}
+
+.highlight-yellow {
+  border-radius: 5px;
+  background-color: #fffea6;
+}
+.highlight-green {
+  border-radius: 5px;
+  background-color: #a6ffaa;
+}
+.highlight-blue {
+  border-radius: 5px;
+  background-color: #a6c8ff;
+}
+.highlight-purple {
+  border-radius: 5px;
+  background-color: #e6a6ff;
+}
+.highlight-red {
+  border-radius: 5px;
+  background-color: #ffa6aa;
+}
+
+.highlight {
+  background-color: #eef43b;
+}
+
+li.nav-item,
+a {
+  color: black;
+}
+
+.mini-nav.nav-item.nav-link {
+  color: black !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.theme-outline-secondary-btn {
+  color: #de7b5f;
+  border-color: #de7b5f;
+}
+
+.theme-outline-secondary-btn:hover {
+  color: white;
+  background-color: #de7b5f;
+}
+
+.theme-outline-primary-btn {
+  color: #0098a5;
+  border-color: #0098a5;
+}
+
+.theme-outline-primary-btn:hover {
+  color: white;
+  background-color: #0098a5;
+}
+
+.theme-primary-btn,
+.theme-primary-btn:hover {
+  color: white;
+  background-color: #0098a5;
+}
+
+.theme-secondary-btn,
+.theme-secondary-btn:hover {
+  color: white;
+  background-color: #de7b5f;
+}
+
+.course-navigation a:hover {
+  color: #de7b5f !important;
+}
+
+.theme-secondary-text {
+  color: #de7b5f;
+}
+
+.link-arrow {
+  color: #0098a5;
+}
+
+.theme-primary-bg {
+  background-color: #0098a5;
+}
+
+.theme-secondary-bg {
+  background-color: #de7b5f;
+}
+
+a {
+  text-decoration: none;
+}
+
+.theme-primary-text {
+  color: #0098a5;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #0098a5;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #0098a5;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

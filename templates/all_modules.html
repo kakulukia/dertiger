@@ -36,7 +36,7 @@
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4" style="height: 160px">
-                        <img src="media/{{ single_module.thumbnail }}" class="img-fluid rounded-start  h-100 w-100"
+                        <img src="{{ MEDIA_URL }}{{ single_module.thumbnail }}" class="img-fluid rounded-start  h-100 w-100"
                             alt="...">
                     </div>
                     <div class="col-md-8">
@@ -86,7 +86,7 @@
                 <div class="card-header bg-white ">
                     <h4 class="my-2 py-0">{{ training.name }}</h4>
                 </div>
-                <img src="media/{{ training.thumbnail }}" class="card-img-top" alt="...">
+                <img src="{{ MEDIA_URL }}{{ training.thumbnail }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <!-- <h4 class="card-title">{{ training.name }}</h4> -->
                     <div>

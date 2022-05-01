@@ -1,7 +1,7 @@
 <div class="card mb-3" {% if training == single_training %}style="box-shadow: 5px 5px 5px #cccccc;"{% endif %}>
     <div class="row g-0">
         <div class="col-md-4" style="height: 160px">
-            <img src="media/{{ single_training.thumbnail }}" class="img-fluid rounded-start h-100 w-100" alt="...">
+            <img src="{{ MEDIA_URL }}{{ single_training.thumbnail }}" class="img-fluid rounded-start h-100 w-100" alt="...">
         </div>
         <div class="col-md-8">
             <div class="card-body">
