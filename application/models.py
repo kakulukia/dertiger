@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.contrib.sessions.models import Session
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django_quill.fields import QuillField
 # from django.contrib import admin
 
 
@@ -103,11 +104,12 @@ class Device(models.Model):
 def delete_session(sender, instance, *args, **kwargs):
     instance.session.delete()
 
-
 # Model for the Trainings
+
+
 class Training(models.Model):
     name = models.CharField(max_length=50)
-    description = models.TextField()
+    description = QuillField(null=True, blank=True)
     thumbnail = models.ImageField(upload_to='thumbnails/')
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -130,9 +132,13 @@ class Training(models.Model):
         return int((completed / all_medias.count()) * 100)
 
     def get_short_description(self):
+        return None
+        from html2text import html2text
+
+        text = html2text(self.description.html)
         limit = 150
-        description = self.description
-        if len(description) > limit:
+        description = text
+        if description and len(description) > limit:
             return description[0: limit] + "..."
         return description
 

@@ -2,6 +2,7 @@
 {% load django_bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
+{% include 'django_quill/media.html' %}
 
 <!doctype html>
 <html lang="en">
@@ -38,6 +39,16 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <script src="{% static 'assets/js/general.js' %}"></script>
 
+
+    <!-- Calendly badge widget begin -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script
+        type="text/javascript">window.onload = function () { Calendly.initBadgeWidget({ url: 'https://calendly.com/mailanmonique/30min?primary_color=de7b5f', text: 'Book appointment', color: '#de7b5f', textColor: '#ffffff', branding: true }); }</script>
+    
+    <!-- Calendly badge widget end -->
+
+
 </head>
 
 <body>
@@ -66,6 +77,7 @@
     <div class="container">
         
         <div>
+            
 
             {% block content %}
 

@@ -7,7 +7,7 @@
 {% block title %}Dashboard{% endblock title %}
 {% block content %}
 
-<div class="px-3 my-5">
+<div class="px-3 mt-5 mb-3">
     <h5 class="text-secondary">All modules</h5>
     <h1 class="h2">{{ training.name }}</h1>
 </div>
@@ -17,7 +17,7 @@
 
 <div class="container mb-3">
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-12 col-md-12 col-xl-8 py-3">
             {% if not modules  %}
             <div class="card">
                 <div class="card-body text-center d-flex align-items-center justify-content-center"
@@ -35,17 +35,17 @@
 
             <div class="card mb-3">
                 <div class="row g-0">
-                    <div class="col-md-4" style="height: 160px">
+                    <div class="col-md-4">
                         <img src="{{ MEDIA_URL }}{{ single_module.thumbnail }}" class="img-fluid rounded-start  h-100 w-100"
                             alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-10">
+                                <div class="col-sm-9">
                                     <h5 class="card-title">Module {{ forloop.counter }} - {{ single_module.name }}</h5>
                                 </div>
-                                <div class="col-sm-2 d-flex justify-content-end theme-primary-text">
+                                <div class="col-sm-3 d-flex justify-content-end theme-primary-text">
                                     <p style="font-size: 16px" class="mb-0">{{ single_module.get_all_media.count }} lessons</p>
                                     
 
@@ -78,7 +78,7 @@
             {% endfor %}
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-12 col-md-12 col-xl-4 py-3">
 
 
             {% if training %}
@@ -90,7 +90,7 @@
                 <div class="card-body">
                     <!-- <h4 class="card-title">{{ training.name }}</h4> -->
                     <div>
-                        <p class="card-text">{{ training.description }}</p>
+                        <p class="card-text">{{ training.description.html | safe }}</p>
                     </div>
                 </div>
             </div>

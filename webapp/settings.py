@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_bootstrap5',
     'storages',
+    'django_quill',
     # adding django-agents to the installed apps
     'django_user_agents',
     'adminpanel.apps.AdminpanelConfig',
@@ -172,8 +173,8 @@ BOOTSTRAP5 = {
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # -------------------------AWS S3 CONFIGURATION---------------------------#
-AWS_ACCESS_KEY_ID = '********************'
-AWS_SECRET_ACCESS_KEY = '********************'
+AWS_ACCESS_KEY_ID = '******************'
+AWS_SECRET_ACCESS_KEY = '******************'
 AWS_STORAGE_BUCKET_NAME = 'andy-media-bucket-1'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
@@ -185,6 +186,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 #--------------------- media files configuration for production-----------------#

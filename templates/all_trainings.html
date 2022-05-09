@@ -46,14 +46,14 @@
 </div>
 
 
-<div class="px-3 my-5">
+<div class="px-3 mt-5 mb-3">
     <h1 class="h2">All Trainings</h1>
 </div>
 {% include 'inc/msgs.inc.html' %}
 
 <div class="container">
     <div class="row mb-4">
-        <div class="col-sm-8">
+        <div class="col-sm-12 col-md-12 col-xl-8 py-3">
             {% if not trainings  %}
             <div class="card">
                 <div class="card-body text-center d-flex align-items-center justify-content-center" style="height: 300px;">
@@ -72,7 +72,7 @@
             {% endfor %}
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-12 col-md-12 col-xl-4 py-3">
 
 
             {% if training %}
@@ -84,7 +84,7 @@
                 <div class="card-body">
                     <!-- <h4 class="card-title">{{ training.name }}</h4> -->
                     <div style="max-height: 200px; overflow-y: auto; padding-right: 10px;" class="mb-3">
-                        <p class="card-text" style="">{{ training.description }}</p>
+                        <p class="card-text" style="">{{ training.description.html | safe }}</p>
                     </div>
 
                     {% with all_modules=training.get_all_modules %}

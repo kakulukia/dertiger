@@ -12,7 +12,7 @@
 
     {% include 'inc/msgs.inc.html' %}
 
-    <div class="px-3 my-5">
+    <div class="px-3 mt-5 mb-3">
         <p class="text-secondary d-flex align-items-center course-navigation" style="font-size: 20px;">
             <a href="{% url 'all_modules' training.id  %}">
                 {{ training }}
@@ -37,7 +37,7 @@
 
     <div class="container">
         <div class="row mb-4">
-            <div class="col-sm-8">
+            <div class="col-sm-12 col-md-12 col-xl-8 py-3">
                 {% if not media %}
                 <script>
                     var to_enter_password = false;
@@ -102,11 +102,10 @@
                 </div>
 
                 {% endif %}
-
-
+                
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-12 col-md-12 col-xl-4 py-3">
                 <div class="card py-3 mb-4">
                     <div class="px-3 pb-2 mb-2">
                         <h6 class="text-secondary">Module</h6>
@@ -164,7 +163,7 @@
                     <div class="card-body">
                         <!-- <h4 class="card-title">{{ training.name }}</h4> -->
                         <div>
-                            <p class="card-text">{{ training.description }}</p>
+                            <p class="card-text">{{ training.description.html | safe }}</p>
                         </div>
                     </div>
                 </div>

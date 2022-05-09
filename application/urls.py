@@ -62,7 +62,7 @@ urlpatterns = [
     path('trainings/<int:training_id>/modules/',
          views.all_modules, name='all_modules'),
 
-     # Path to (Single training - with all modules) Page
+    # Path to (Single training - with all modules) Page
     path('trainings/<int:training_id>/',
          views.resume_all_modules, name='resume_all_modules'),
 
@@ -78,3 +78,5 @@ urlpatterns = [
 
 urlpatterns = urlpatterns + \
     static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_URL)
