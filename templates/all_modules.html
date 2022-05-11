@@ -36,14 +36,18 @@
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="{{ MEDIA_URL }}{{ single_module.thumbnail }}" class="img-fluid rounded-start  h-100 w-100"
-                            alt="...">
+                        <a href="{% url 'media' training.id single_module.id  %}">
+                            <img src="{{ MEDIA_URL }}{{ single_module.thumbnail }}" class="img-fluid rounded-start  h-100 w-100"
+                                alt="...">
+                        </a>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-9">
-                                    <h5 class="card-title">Module {{ forloop.counter }} - {{ single_module.name }}</h5>
+                                    <a class="text-dark" href="{% url 'media' training.id single_module.id  %}">
+                                        <h5 class="card-title">Module {{ forloop.counter }} - {{ single_module.name }}</h5>
+                                    </a>
                                 </div>
                                 <div class="col-sm-3 d-flex justify-content-end theme-primary-text">
                                     <p style="font-size: 16px" class="mb-0">{{ single_module.get_all_media.count }} lessons</p>

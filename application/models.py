@@ -132,7 +132,7 @@ class Training(models.Model):
         return int((completed / all_medias.count()) * 100)
 
     def get_short_description(self):
-        return None
+        # return None
         from html2text import html2text
 
         text = html2text(self.description.html)
